@@ -1,7 +1,6 @@
 use std::collections::{BTreeMap, HashMap};
 
-use nebula_fbthrift_meta_v3::{EdgeItem, TagItem};
-
+use crate::nebula_fbthrift_meta_v3::{EdgeItem, TagItem};
 use crate::common::types::HostAddr;
 
 use super::client::MetaClientError;

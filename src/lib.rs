@@ -23,7 +23,17 @@ pub(crate) mod value_wrapper;
 
 pub use dataset_wrapper::DataSetError;
 
-use nebula_fbthrift_graph_v3::dependencies::common;
+#[allow(dead_code)]
+mod fbthrift;
+
+mod fbthrift_transport;
+mod fbthrift_transport_response_handler;
+
+mod fbthrift_protocol;
+use fbthrift_protocol::common;
+use fbthrift_protocol::graph as nebula_fbthrift_graph_v3;
+use fbthrift_protocol::meta as nebula_fbthrift_meta_v3;
+use fbthrift_protocol::storage as nebula_fbthrift_storage_v3;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub struct HostAddress {

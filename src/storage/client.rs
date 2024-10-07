@@ -2,20 +2,6 @@ use core::fmt;
 use std::collections::HashMap;
 
 use bytes::Bytes;
-use fbthrift::{
-    BinaryProtocol, BufMutExt, Framing, FramingDecoded, FramingEncodedFinal, ProtocolEncoded,
-    Transport,
-};
-use fbthrift_transport::{
-    impl_tokio::{TokioSleep, TokioTcpStream},
-    AsyncTransport, AsyncTransportConfiguration,
-};
-use nebula_fbthrift_storage_v3::{
-    client::{GraphStorageService, GraphStorageServiceImpl},
-    errors::graph_storage_service::{ScanEdgeError, ScanVertexError},
-    types::{ScanEdgeRequest, ScanResponse, ScanVertexRequest},
-    EdgeProp, VertexProp,
-};
 
 use super::{
     query::{StorageQueryError, StorageScanEdgeOutput, StorageScanVertexOutput},
@@ -24,6 +10,20 @@ use super::{
 use crate::{common::types::HostAddr, meta::client::MetaClientError};
 use crate::{storage::query::StorageQueryOutput, MetaTransportResponseHandler};
 use crate::{MetaClient, TimezoneInfo};
+use crate::fbthrift::{
+    BinaryProtocol, BufMutExt, Framing, FramingDecoded, FramingEncodedFinal, ProtocolEncoded,
+    Transport,
+};
+use crate::fbthrift_transport::{
+    impl_tokio::{TokioSleep, TokioTcpStream},
+    AsyncTransport, AsyncTransportConfiguration,
+};
+use crate::nebula_fbthrift_storage_v3::{
+    client::{GraphStorageService, GraphStorageServiceImpl},
+    errors::graph_storage_service::{ScanEdgeError, ScanVertexError},
+    types::{ScanEdgeRequest, ScanResponse, ScanVertexRequest},
+    EdgeProp, VertexProp,
+};
 
 pub(super) struct StorageConnection<
     T = AsyncTransport<TokioTcpStream, TokioSleep, StorageTransportResponseHandler>,

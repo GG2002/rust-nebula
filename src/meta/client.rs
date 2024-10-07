@@ -4,15 +4,21 @@ use std::{
 };
 
 use bytes::Bytes;
-use fbthrift::{
+
+use crate::MetaTransportResponseHandler;
+use crate::{
+    common::{HostAddr, PartitionID},
+    HostAddress,
+};
+use crate::fbthrift::{
     BinaryProtocol, BufMutExt, Framing, FramingDecoded, FramingEncodedFinal,
     NonthrowingFunctionError, ProtocolEncoded, Transport,
 };
-use fbthrift_transport::{
+use crate::fbthrift_transport::{
     impl_tokio::{TokioSleep, TokioTcpStream},
     AsyncTransport, AsyncTransportConfiguration,
 };
-use nebula_fbthrift_meta_v3::{
+use crate::nebula_fbthrift_meta_v3::{
     client::{MetaService, MetaServiceImpl},
     errors::meta_service::{
         GetPartsAllocError, ListEdgesError, ListPartsError, ListSpacesError, ListTagsError,
@@ -24,12 +30,6 @@ use nebula_fbthrift_meta_v3::{
         ListTagsReq, ListTagsResp,
     },
     EdgeItem, HostItem, IdName, PartItem, Schema, TagItem, ID,
-};
-
-use crate::MetaTransportResponseHandler;
-use crate::{
-    common::{HostAddr, PartitionID},
-    HostAddress,
 };
 
 use super::metacache::{MetaCache, SpaceCache};

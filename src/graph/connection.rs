@@ -1,18 +1,18 @@
 use bytes::Bytes;
-use fbthrift::{
+
+use crate::common::types::ErrorCode;
+use crate::fbthrift::{
     ApplicationException, ApplicationExceptionErrorCode, BinaryProtocol, BufMutExt, Framing,
     FramingDecoded, FramingEncodedFinal, ProtocolEncoded, Transport,
 };
-use fbthrift_transport::{
+use crate::fbthrift_transport::{
     impl_tokio::{TokioSleep, TokioTcpStream},
     AsyncTransport,
 };
-use nebula_fbthrift_graph_v3::{
+use crate::nebula_fbthrift_graph_v3::{
     client::{GraphService, GraphServiceImpl},
-    dependencies::common::types::ErrorCode,
     errors::graph_service::AuthenticateError,
 };
-
 use crate::GraphTransportResponseHandler;
 
 //

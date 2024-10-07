@@ -1,11 +1,11 @@
 use std::io::{Cursor, Error as IoError, ErrorKind as IoErrorKind};
 
-use fbthrift::{
+use crate::fbthrift::{
     binary_protocol::BinaryProtocolDeserializer, ApplicationException, Deserialize, MessageType,
     ProtocolReader,
 };
-use fbthrift_transport_response_handler::ResponseHandler;
-use nebula_fbthrift_storage_v3::services::graph_storage_service::{ScanEdgeExn, ScanVertexExn};
+use crate::fbthrift_transport_response_handler::ResponseHandler;
+use crate::nebula_fbthrift_storage_v3::services::graph_storage_service::{ScanEdgeExn, ScanVertexExn};
 
 #[derive(Clone)]
 pub struct StorageTransportResponseHandler;

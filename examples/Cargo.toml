@@ -22,7 +22,7 @@ path = "src/storage_client_connect.rs"
 
 [dependencies]
 bb8 = "0.8.5"
-rust-nebula = { version = "0.1", path = ".." }
+rust-nebula = { version = "^0.0.2", path = ".." }
 tokio = { version = "1", default-features = false, features = [
     "macros",
     "rt-multi-thread",

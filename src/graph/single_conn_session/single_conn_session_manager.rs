@@ -1,9 +1,9 @@
 use std::sync::atomic::{AtomicUsize, Ordering};
 
 use async_trait::async_trait;
-use fbthrift_transport::{AsyncTransport, AsyncTransportConfiguration};
-use fbthrift_transport_response_handler::ResponseHandler;
 
+use crate::fbthrift_transport::{AsyncTransport, AsyncTransportConfiguration};
+use crate::fbthrift_transport_response_handler::ResponseHandler;
 use crate::HostAddress;
 use crate::{
     graph::{connection::GraphConnection, GraphQuery},

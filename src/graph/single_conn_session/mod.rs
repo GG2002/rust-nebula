@@ -1,21 +1,21 @@
 use async_trait::async_trait;
 use bytes::Bytes;
-use fbthrift::{
+use std::io::{Error as IoError, ErrorKind as IoErrorKind};
+
+use crate::common::types::ErrorCode;
+use crate::fbthrift::{
     BinaryProtocol, BufMutExt, Framing, FramingDecoded, FramingEncodedFinal, ProtocolEncoded,
     Transport,
 };
-use fbthrift_transport::{
+use crate::fbthrift_transport::{
     impl_tokio::{TokioSleep, TokioTcpStream},
     AsyncTransport,
 };
-use nebula_fbthrift_graph_v3::{
+use crate::nebula_fbthrift_graph_v3::{
     client::GraphService as _,
-    dependencies::common::types::ErrorCode,
     errors::graph_service::{ExecuteError, ExecuteJsonError, SignoutError},
     graph_service::AuthenticateError,
 };
-use std::io::{Error as IoError, ErrorKind as IoErrorKind};
-
 use crate::TimezoneInfo;
 use crate::{
     graph::query::{GraphQueryError, GraphQueryOutput},

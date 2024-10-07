@@ -1,7 +1,16 @@
 [package]
 name = "rust-nebula"
-version = "0.1.0"
+version = "0.0.2"
 edition = "2021"
+description = "A Rust client for NebulaGraph database."
+authors = ["feathercyc <feathercyc@163.com>"]
+license = "Apache-2.0 OR MIT"
+repository = "https://github.com/nebula-contrib/rust-nebula"
+homepage = "https://github.com/nebula-contrib/rust-nebula"
+documentation = "https://docs.rs/rust-nebula"
+keywords = ["NebulaGraph", "Client"]
+categories = ["database"]
+readme = "README.md"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -10,32 +19,50 @@ features = ["graph", "meta", "storage"]
 
 [features]
 default = ["graph", "storage", "meta"]
-graph = ["nebula-fbthrift-graph-v3", "serde"]
-meta = ["nebula-fbthrift-meta-v3"]
-storage = ["nebula-fbthrift-storage-v3", "meta", "serde"]
-show_struct_result = []
+graph = ["serde"]
+meta = []
+storage = ["meta", "serde"]
 
 [dependencies]
-fbthrift = { package = "fbthrift-git", version = "=0.0.7", default-features = false }
-fbthrift-transport = { version = "0.9", features = ["impl_tokio"] }
-fbthrift-transport-response-handler = { version = "0.7" }
-
 serde = { version = "1", default-features = false, features = [
     "derive",
 ], optional = true }
 
-bytes = { version = "1", default-features = false }
+bytes = { version = "1.1", default-features = false, features = ["serde"]  }
 async-trait = { version = "0.1", default-features = false }
 
-nebula-fbthrift-graph-v3 = { version = "^0.3", default-features = false, optional = true }
-nebula-fbthrift-meta-v3 = { version = "^0.3", default-features = false, optional = true }
-nebula-fbthrift-storage-v3 = { version = "^0.3", default-features = false, optional = true }
 bb8 = "0.8.5"
+
+anyhow = "1.0.65"
+base64 = "0.11.0"
+bufsize = "1.0"
+futures = { version = "0.3", features = ["async-await", "std"] }
+ghost = "0.1"
+num-derive = "0.3.3"
+num-traits = "0.2"
+ordered-float = { version = "1.1.1", features = ["serde"] }
+panic-message = "0.3"
+serde_json = { version = "1.0.79", features = ["float_roundtrip", "unbounded_depth"] }
+thiserror = "1.0.36"
+const-cstr = { version = "0.3", default-features = false }
+tracing = { version = "0.1", default-features = false, features = [
+    "attributes",
+] }
+futures-util = { version = "0.3", default-features = false, features = ["io"] }
+async-sleep = { version = "0.4", default-features = false, features = ["rw", "impl_tokio"] }
+tokio = { version = "1", default-features = false, features = ["net"] }
+async-compat = { version = "0.2", default-features = false }
+
 
 [dev-dependencies]
 chrono = { version = "0.4", features = ["serde"] }
 serde_repr = { version = "0.1" }
 float-cmp = { version = "0.9" }
+
+quickcheck = "1.0"
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "io-util"] }
+futures-lite = { version = "1" }
+# async-executor = { version = "1" }
 
 [package.metadata.cargo-all-features]
 skip_optional_dependencies = true
